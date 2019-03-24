@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width" />
+  {% block head %}
+  <title>{% block title %} {% endblock %}</title>
+  <link rel="stylesheet" href="static/styles.css" type="text/css"/>
+{% endblock %}
+</head>
+<body>
+  <header>
+    <h1>{{ self.title() }}</h1>
+
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="/about">About</a>
+      <a href="/hello">Hello</a>
+    </nav>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include 'layouts/footer.html' %}
+</body>
+</html>

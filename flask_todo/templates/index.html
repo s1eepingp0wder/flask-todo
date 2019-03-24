@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Flask Boilerplate Homepage{% endblock %}
+
+{% block content %}
+  <p>This is HTML</p>
+  <button>I don't do anything</button>
+  <hr />
+  <p>Here are things you can do with request methods:</p>
+  <ol>
+  {% for m in request_methods %}
+    {% if m == method %}
+      <li class="selected">{{ m }}</li>
+    {% else %}
+      <li> {{ m }}</li>
+    {% endif %}
+  {% endfor %}
+</ol>
+<form method="get">
+  <input type="submit" value="Get Method"/>
+</form>
+<form method="post">
+  <input type="submit" value="Post Method"/>
+</form>
+
+{% endblock %}

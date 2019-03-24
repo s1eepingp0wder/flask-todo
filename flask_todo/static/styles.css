@@ -1,0 +1,11 @@
+html{
+  background: powderblue;
+}
+.selected{
+  color: green;
+  text-decoration: underline;
+}
+
+.selected::after{
+  content: ' ✓'
+}
