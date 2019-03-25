@@ -2,24 +2,29 @@
 {% block title %}Flask Boilerplate Homepage{% endblock %}
 
 {% block content %}
-  <p>This is HTML</p>
-  <button>I don't do anything</button>
-  <hr />
   <p>Here are things you can do with request methods:</p>
-  <ol>
-  {% for m in request_methods %}
-    {% if m == method %}
-      <li class="selected">{{ m }}</li>
+  <div class="todo-wrapper">
+  {% for l in todos %}
+    {% if todos[l][3] == True %}
+    <section class="finished">
+      <div>{{ todos[l][0] }}</div>
+      <div>{{ todos[l][1] }}</div>
+      <div>{{ todos[l][2] }}</div>
+    </section>
     {% else %}
-      <li> {{ m }}</li>
+    <section>
+      <div> {{ todos[l][0] }}</div>
+      <div> {{ todos[l][1] }}</div>
+      <div> {{ todos[l][2] }}</div>
+    </section>
     {% endif %}
   {% endfor %}
-</ol>
-<form method="get">
+</div>
+<!-- <form method="get">
   <input type="submit" value="Get Method"/>
 </form>
 <form method="post">
   <input type="submit" value="Post Method"/>
-</form>
+</form> -->
 
 {% endblock %}
