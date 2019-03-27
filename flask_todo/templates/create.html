@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Get it Done!{% endblock %}
+
+{% block content %}
+  <div class="todo-wrapper greybg">
+      <!-- Make a form to submit a thing. -->
+      <p>Create a Task:</p>
+    <form method="post">
+        <label>
+          Task Name: <br/><input class="textbox" value="{{ name }}" type="text" placeholder="{{ random.choice(task_names) }}" name="name" required/>
+        </label>
+      <br />
+        <label>
+          Description: <br/><input class="textbox" type="text" value="{{ description }}" placeholder="An awesome description goes here." name="description" required/>
+        </label>
+      <br />
+        <input class="button" type="submit" value="Let's Do It!"/>
+    </form>
+</div>
+
+{% endblock %}

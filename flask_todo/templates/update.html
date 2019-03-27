@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Get it Done!{% endblock %}
+
+{% block content %}
+  <p>Select a Task:</p>
+  <div class="todo-wrapper">
+  {% for l in range(0, len) %}
+    {% if todos[l][3] == True %}
+    <section class="completed">
+      <div><h2>{{ todos[l][0] }}</h2></div>
+    </section>
+    {% else %}
+    <section>
+      <div><h2>{{ todos[l][0] }}</h2></div>
+      <label>
+        <input type="radio" value="Finished" name="action" id="{{ todos[l][0] }}"/>Finished! ({{ todos[l][0] }})
+      </label>
+    </section>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% endblock %}

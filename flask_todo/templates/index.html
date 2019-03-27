@@ -1,21 +1,23 @@
 {% extends 'layouts/base.html' %}
-{% block title %}Flask Boilerplate Homepage{% endblock %}
+{% block title %}Get it Done!{% endblock %}
 
 {% block content %}
-  <p>Here are things you can do with request methods:</p>
+<div class="greybg fullwidth">
+  <p>Your Tasks today:</p>
+</div>
   <div class="todo-wrapper">
-  {% for l in todos %}
+  {% for l in range(0, len) %}
     {% if todos[l][3] == True %}
-    <section class="finished">
-      <div>{{ todos[l][0] }}</div>
-      <div>{{ todos[l][1] }}</div>
-      <div>{{ todos[l][2] }}</div>
+    <section class="completed">
+      <div><h2>{{ todos[l][0] }}</h2></div>
+      <div>Description: <i>{{ todos[l][1] }}</i></div>
+      <div>Created At: <i>{{ todos[l][2] }}</i></div>
     </section>
     {% else %}
     <section>
-      <div> {{ todos[l][0] }}</div>
-      <div> {{ todos[l][1] }}</div>
-      <div> {{ todos[l][2] }}</div>
+      <div><h2>{{ todos[l][0] }}</h2></div>
+      <div>Description: <i>{{ todos[l][1] }}</i></div>
+      <div>Created At: <i>{{ todos[l][2] }}</i></div>
     </section>
     {% endif %}
   {% endfor %}

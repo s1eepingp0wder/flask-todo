@@ -1,11 +1,122 @@
-html{
-  background: powderblue;
+@import url('https://fonts.googleapis.com/css?family=Nanum+Brush+Script|Open+Sans');
+@keyframes glowing {
+  0% { box-shadow: 0 0 30px limegreen; }
+  40% { box-shadow: 0 0 20px lightgreen; }
+  60% { box-shadow: 0 0 20px greenyellow; }
+  100% { box-shadow: 0 0 30px palegreen; }
 }
-.selected{
+html{
+  /* background: #EFEFEF; */
+  background-image: url("./stripey.png");
+  font-family: 'Open Sans', sans-serif;
+}
+h1, h2{
+  margin: -5px auto -10px auto;
+  font-family: 'Nanum Brush Script', cursive;
+  font-size: 3em;
+}
+h1{
+  font-size: 4em;
+  font-style: italic;
+  color: #EFEFEF;
+}
+section{
+  width: 50%;
+  padding: 15px;
+  border: 3px solid black;
+  margin-bottom: 5px;
+  transition: background .5s;
+  border-radius: 5px;
+  background: #8E8E8E;
+}
+section:hover{
+  background: lightyellow;
+}
+.completed{
   color: green;
-  text-decoration: underline;
+  background: lightgreen;
+  border-color: green;
+  animation-name: glowing;
+  animation-duration:4s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+.completed:hover{
+  background: greenyellow;
+}
+.radio-button{
+
+}
+.textbox{
+  height: 40px;
+  width: 600px;
+  border-radius: 3px;
+  font-size: 1.3em;
+  font-style: italic;
+  border: 2px black solid;
+  padding: 5px;
+  margin: 10px auto;
+}
+.textbox::placeholder{
+  color: deepskyblue;
+  opacity: 0.3;
 }
 
-.selected::after{
-  content: ' ✓'
+.button{
+  background: green;
+  color: white;
+  padding: 14px;
+  border-radius: 4px;
 }
+.todo-wrapper{
+  width: 900px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  /* border: 3px white dashed; */
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+nav{
+  height: 50px;
+  background: #8E8E8E;
+  border: 2px black solid;
+  display: flex;
+  justify-content: space-around;
+}
+nav a{
+  height: 35px;
+  background: transparent;
+  position: relative;
+  padding: 15px 30px 0 30px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: background .3s;
+}
+nav a:hover{
+  background: green;
+}
+
+.greybg{
+  padding: 15px;
+  border: 1px solid black;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background: #8E8E8E;
+}
+.fullwidth{
+    width: 99vw;
+}
+.copyright{
+  position: fixed;
+  bottom: 0;
+  left: 15px;
+}
+/* .completed::after{
+  content: ' ✓'
+} */
