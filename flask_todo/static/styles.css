@@ -11,9 +11,14 @@
 }
 html{
   background: #383838;
-  background-image: url("./stripey.png");
+  background-image: url("https://images.pexels.com/photos/9044/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   font-family: 'Open Sans', sans-serif;
-  animation: animatedBackground 80s linear infinite;
+  /* animation: animatedBackground 80s linear infinite; */
 }
 h1, h2{
   margin: -5px auto -10px auto;
@@ -29,6 +34,7 @@ h1{
   /* border: 1px white dashed; */
   text-align: center;
   font-size: 6em;
+  text-shadow: 2px 2px 4px #000000;
 }
 section{
   width: 50%;
@@ -37,11 +43,12 @@ section{
   margin-bottom: 5px;
   transition: background .5s;
   border-radius: 5px;
-  background: #8E8E8E;
+  background: #232323;
+  color: white;
 }
-section:hover{
+/* section:hover{
   background: lightyellow;
-}
+} */
 .completed{
   color: green;
   background: lightgreen;
@@ -137,6 +144,26 @@ nav a:hover{
 }
 .checkbox{
   background: green;
+}
+.bottom-right{
+  position: relative;
+  bottom: 0;
+  left: 400px;
+}
+section a {
+  text-decoration: none;
+  color: green;
+  transition: 0.5s;
+}
+section a:hover{
+  color: lime;
+}
+.red {
+  color: darkred;
+  transition: 0.5s;
+}
+.red:hover{
+  color: red;
 }
 /* .completed::after{
   content: ' ✓'

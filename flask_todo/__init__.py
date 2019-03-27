@@ -50,7 +50,7 @@ def create_app(test_config=None):
 	todo_list = cur.fetchall()
 	# print(todo_list)
 
-	@app.route('/', methods=['GET'])
+	@app.route('/', methods=['GET', 'POST', 'DELETE'])
 	def index():
 		cur.execute(sql_query)
 		todo_list = cur.fetchall()
@@ -85,13 +85,13 @@ def create_app(test_config=None):
 		conn.commit()
 		return redirect(url_for('index'))
 
-	# def update_task(id):
-	# 	task = get_task(id)
-	# 	if request.method == 'POST':
-	# 		task_action = request.form['action']
-	# 		db = cur.execute('UPDATE tasks SET completed = true WHERE task_id= %s',[id])
-	# 		conn.commit()
-	# 		return redirect(url_for('/'))
+	@app.route('/<int:id>/delete', methods=('POST','GET'))
+	def delete(id):
+		get_task(id)
+		cur.execute('DELETE FROM tasks WHERE task_id= %s',[id])
+		conn.commit()
+		return redirect(url_for('index'))
+
 
 	# End App
 	return app
