@@ -10,11 +10,12 @@
 </head>
 <body>
   <header>
-    <h1>{{ self.title() }}</h1>
+    <h1 class="title">{{ self.title() }}</h1>
 
     <nav class="fullwidth">
       <a href="{{ url_for('index') }}">Home</a>
       <a href="{{ url_for('create_task') }}">Add Task</a>
+      <a href="{{ url_for('update_task') }}">Mark Task</a>
     </nav>
   </header>
   <main>

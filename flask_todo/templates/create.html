@@ -2,6 +2,9 @@
 {% block title %}Get it Done!{% endblock %}
 
 {% block content %}
+  {% if posted_successfully == True %}
+    <div class="completed">Success! Your task was added!</div>
+  {% endif %}
   <div class="todo-wrapper greybg">
       <!-- Make a form to submit a thing. -->
       <p>Create a Task:</p>
@@ -16,6 +19,13 @@
       <br />
         <input class="button" type="submit" value="Let's Do It!"/>
     </form>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <p class=flashes>{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
 </div>
 
 {% endblock %}

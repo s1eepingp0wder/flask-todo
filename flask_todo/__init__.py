@@ -4,9 +4,10 @@
 import datetime
 import time
 import random
+import psycopg2
 
 # Imported packages
-from flask import Flask, request, make_response, render_template
+from flask import Flask, request, make_response, render_template, flash
 
 def page_not_found(e):
 	return render_template('404.html')
@@ -24,18 +25,35 @@ def create_app(test_config=None):
 	else:
 		app.config.from_mapping(test_config)
 
-	# Let's make some lists.
+	# Database Stuff.
+
+	conn = psycopg2.connect("dbname=todo-app user=csetuser")
+	cur= conn.cursor()
+
+	# Real quick... What's the time?
 	st = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
-	# print(st)
-	todo_list=[
-		['Buy a 1969 Chevy Camaro', 'I want a cool car.', st, False],
-		['Get Married', 'I want to elope.', st, False],
-		['Go to Canada', 'Specifically to Vancouver.', st, False],
-		['Eat breakfast', 'Eat food.', st, True],
-	]
+	# Thanks, mate!
+
+	# Let's do some trickery: Look for this table! If you can't find it, make it.
+	try:
+		# Can we get in?
+		cur.execute("SELECT * FROM tasks;")
+	except:
+		# No. It doesn't exist. Let's make it.
+		cur.execute("CREATE TABLE tasks(name TEXT, description TEXT, time TIMESTAMP, completed BOOLEAN DEFAULT false)")
+		cur.execute("INSERT INTO tasks (name, description, time, completed) VALUES (%s, %s, %s, %s)", ("Hello, World!", "Your first task is to read this task!", st, False))
+		print("Created table \"tasks\".")
+
+
+	sql_query = 'SELECT name, description, time, completed FROM tasks ORDER BY time DESC'
+	cur.execute(sql_query)
+	todo_list = cur.fetchall()
+
 	@app.route('/', methods=['GET'])
 	def index():
-		return render_template('index.html', len= len(todo_list), todos= todo_list, st= st)
+		cur.execute(sql_query)
+		todo_list = cur.fetchall()
+		return render_template('index.html', todos= todo_list, st= st)
 
 	cool_task_names =['Save Planet Mars', 'Buy that Sweet Dreamhouse', 'Take Over the World', 'Buy that final Ultravox album', 'Move to France', 'Move to England', 'Buy a Psychedelic Furs album', 'Go see The Good The Bad Queen', 'Defeat Ganon', 'Save Hyrule', 'Defeat Bowser', 'Save the Mushroom Kingdom', 'Wash my socks', 'Share a Friendship Bracelet with Damon Albarn', 'Achieve World Peace', 'Get a gold tooth', 'Crowd surf at the concert', 'Find The One 💙']
 	@app.route('/create', methods=['GET', 'POST'])
@@ -43,19 +61,17 @@ def create_app(test_config=None):
 		# Was this a POST request or a GET one?
 		if request.method== "GET":
 			# Just render the template.
-			return render_template('create.html', len= len(todo_list), todos= todo_list, st= st, task_names= cool_task_names, random= random)
+			return render_template('create.html', todos= todo_list, st= st, task_names= cool_task_names, random= random)
 		else:
-			new_task=[]
-			x= request.form['name']
-			y= request.form['description']
-			new_task.append(x)
-			new_task.append(y)
-			right_now = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
-			new_task.append(right_now)
-			new_task.append(False)
-			print(x,y)
-			todo_list.append(new_task)
-		return render_template('create.html', len= len(todo_list), todos= todo_list, st= st, task_names= cool_task_names, random= random)
+			task_name= request.form['name']
+			task_desc= request.form['description']
+			cur.execute("INSERT INTO tasks (name, description, time, completed) VALUES (%s, %s, %s, %s)", (task_name, task_desc, st, False))
+			conn.commit()
+			flash(f"Your task \"{task_name}\" was added!")
+		return render_template('create.html', todos= todo_list, st= st, task_names= cool_task_names, random= random)
 
+	@app.route('/update', methods=['GET', 'POST', 'PATCH'])
+	def update_task():
+		return render_template('update.html', len= len(todo_list), todos= todo_list, st= st)
 	# End App
 	return app

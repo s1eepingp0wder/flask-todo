@@ -2,18 +2,18 @@
 {% block title %}Get it Done!{% endblock %}
 
 {% block content %}
-  <p>Select a Task:</p>
-  <div class="todo-wrapper">
+  <div class="todo-wrapper greybg">
+    <h2>THIS IS NOT FINISHED YET.</h2><br />
+    <p>Select a Task:</p><br />
   {% for l in range(0, len) %}
     {% if todos[l][3] == True %}
-    <section class="completed">
-      <div><h2>{{ todos[l][0] }}</h2></div>
-    </section>
+    <!-- Don't show it. No point. -->
     {% else %}
     <section>
       <div><h2>{{ todos[l][0] }}</h2></div>
       <label>
-        <input type="radio" value="Finished" name="action" id="{{ todos[l][0] }}"/>Finished! ({{ todos[l][0] }})
+        <input type="checkbox" value="Finished" name="{{ todos[l][0] }}" id="{{ todos[l][0] }}"/>
+        <span class="checkmark"></span>
       </label>
     </section>
     {% endif %}

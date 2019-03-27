@@ -5,10 +5,15 @@
   60% { box-shadow: 0 0 20px greenyellow; }
   100% { box-shadow: 0 0 30px palegreen; }
 }
+@keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 100% 0; }
+}
 html{
-  /* background: #EFEFEF; */
+  background: #383838;
   background-image: url("./stripey.png");
   font-family: 'Open Sans', sans-serif;
+  animation: animatedBackground 80s linear infinite;
 }
 h1, h2{
   margin: -5px auto -10px auto;
@@ -19,6 +24,11 @@ h1{
   font-size: 4em;
   font-style: italic;
   color: #EFEFEF;
+}
+.title{
+  /* border: 1px white dashed; */
+  text-align: center;
+  font-size: 6em;
 }
 section{
   width: 50%;
@@ -114,8 +124,19 @@ nav a:hover{
 }
 .copyright{
   position: fixed;
-  bottom: 0;
-  left: 15px;
+  bottom: 5px;
+  left: 5px;
+  color: white;
+
+}
+.indented{
+  margin-left: 35px;
+}
+.flashes{
+  display: block;
+}
+.checkbox{
+  background: green;
 }
 /* .completed::after{
   content: ' ✓'
