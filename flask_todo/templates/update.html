@@ -5,18 +5,10 @@
   <div class="todo-wrapper greybg">
     <h2>THIS IS NOT FINISHED YET.</h2><br />
     <p>Select a Task:</p><br />
-  {% for l in range(0, len) %}
-    {% if todos[l][3] == True %}
-    <!-- Don't show it. No point. -->
-    {% else %}
+  {% for item in todos %}
     <section>
-      <div><h2>{{ todos[l][0] }}</h2></div>
-      <label>
-        <input type="checkbox" value="Finished" name="{{ todos[l][0] }}" id="{{ todos[l][0] }}"/>
-        <span class="checkmark"></span>
-      </label>
+      <div><h2>{{ item[0] }}</h2></div>
     </section>
-    {% endif %}
   {% endfor %}
 </div>
 
