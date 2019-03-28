@@ -1,0 +1,24 @@
+{% extends 'layouts/base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Log In{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p class="flashes greybg">{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<div class="todo-wrapper greybg">
+    <form method="post">
+      <label for="username">Username</label>
+      <input name="username" id="username" required>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required>
+      <input type="submit" value="Log In">
+    </form>
+</div>
+{% endblock %}
